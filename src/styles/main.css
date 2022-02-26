@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f6fa;
+  font-family: 'Rubik', sans-serif;
+}
+
+.App {
+  padding: 15px 80px;
+}
+
+.comment {
+  background: white;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 7px;
+  -webkit-box-shadow: 0 5px 14px #8f8f8f1c;
+          box-shadow: 0 5px 14px #8f8f8f1c;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.comment .likes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #f5f6fa;
+  padding: 5px 12px;
+  border-radius: 7px;
+  margin-right: 10px;
+}
+
+.comment .likes h2 {
+  color: #5358b6;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.comment .likes button {
+  all: unset;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.comment .likes button:hover::before, .comment .likes button:hover::after {
+  background-color: #5358b6;
+}
+
+.comment .likes button::before, .comment .likes button::after {
+  content: '';
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+  height: 3px;
+  width: 15px;
+  background: #c6c2e6;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.comment .likes button::after {
+  height: 15px;
+  width: 3px;
+}
+
+.comment .likes button:nth-child(3)::after {
+  display: none;
+}
+
+.comment .main {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.comment .main .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.comment .main .header button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.comment .main .header button span {
+  color: #5358b6 !important;
+}
+
+.comment .main .header button svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  fill: #5358b6;
+}
+
+.comment .main .header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.comment .main .header div img {
+  height: 35px;
+  width: 35px;
+}
+
+.comment .main .header div h4 {
+  margin: 0 15px;
+}
+
+.comment .main .header div span {
+  color: #898989;
+}
+
+.comment .main .body {
+  padding: 10px 0;
+  line-height: 25px;
+  color: #464646;
+}
+
+.newComment {
+  background: white;
+  padding: 12px;
+  -webkit-box-shadow: 0 3px 14px #eff0f4;
+          box-shadow: 0 3px 14px #eff0f4;
+  border-radius: 5px;
+  margin: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.newComment img {
+  width: 40px;
+  height: 40px;
+}
+
+.newComment textarea {
+  width: 100%;
+  margin: 0 15px;
+  border: 2px solid gainsboro;
+  border-radius: 4px;
+  outline: 0;
+  padding: 12px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  font-family: 'Rubik', sans-serif;
+}
+
+.newComment textarea:focus {
+  border: 2px solid #818181 !important;
+}
+
+.newComment button {
+  padding: 12px;
+  border: 0;
+  outline: 0;
+  background: #5358b68a;
+  color: white;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.newComment button:hover {
+  background: #5358b6 !important;
+}
+
+.reply {
+  margin-left: 50px;
+  padding-left: 20px;
+  border-left: 3px solid #dedbf1;
+}
+
+.mention {
+  font-weight: 700;
+  color: #5358b6;
+}
+
+.local {
+  margin-right: 10px;
+  background: #5358b6;
+  color: white !important;
+  padding: 4px 8px;
+  border-radius: 3px;
+}

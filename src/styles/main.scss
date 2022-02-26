@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+$greyBlue: #f5f6fa;
+$darkBlue: #5358b6;
+body {
+	background-color: $greyBlue;
+	font-family: 'Rubik', sans-serif;
+}
+.App {
+	padding: 15px 80px;
+}
+.comment {
+	background: white;
+	margin: 15px;
+	padding: 20px;
+	border-radius: 7px;
+	box-shadow: 0 5px 14px #8f8f8f1c;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	.likes {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-color: $greyBlue;
+		padding: 5px 12px;
+		border-radius: 7px;
+
+		margin-right: 10px;
+		h2 {
+			color: $darkBlue;
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+		button {
+			all: unset;
+			position: relative;
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+			&:hover {
+				&::before,
+				&::after {
+					background-color: $darkBlue;
+				}
+			}
+			&::before,
+			&::after {
+				content: '';
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				position: absolute;
+				height: 3px;
+				width: 15px;
+				background: #c6c2e6;
+				transition: 0.3s;
+			}
+			&::after {
+				height: 15px;
+				width: 3px;
+			}
+		}
+		button:nth-child(3) {
+			&::after {
+				display: none;
+			}
+		}
+	}
+	.main {
+		width: 100%;
+		padding: 0 10px;
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin-bottom: 10px;
+			button {
+				display: flex;
+				align-items: center;
+				padding: 5px;
+				background: transparent;
+				border: 0;
+				outline: 0;
+				cursor: pointer;
+				span {
+					color: $darkBlue !important;
+				}
+				font-weight: 700;
+				svg {
+					width: 15px;
+					height: 15px;
+					margin-right: 5px;
+					fill: $darkBlue;
+				}
+			}
+			div {
+				display: flex;
+				align-items: center;
+				img {
+					height: 35px;
+					width: 35px;
+				}
+				h4 {
+					margin: 0 15px;
+				}
+				span {
+					color: #898989;
+				}
+			}
+		}
+		.body {
+			padding: 10px 0;
+			line-height: 25px;
+			color: #464646;
+		}
+	}
+}
+.newComment {
+	background: white;
+	padding: 12px;
+	box-shadow: 0 3px 14px #eff0f4;
+	border-radius: 5px;
+	margin: 15px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	img {
+		width: 40px;
+		height: 40px;
+	}
+	textarea {
+		width: 100%;
+		margin: 0 15px;
+		border: 2px solid gainsboro;
+		border-radius: 4px;
+		outline: 0;
+		padding: 12px;
+		transition: 0.3s;
+		font-family: 'Rubik', sans-serif;
+		&:focus {
+			border: 2px solid rgb(129, 129, 129) !important;
+		}
+	}
+	button {
+		padding: 12px;
+		border: 0;
+		outline: 0;
+		background: #5358b68a;
+		color: white;
+		font-weight: 700;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: 0.3s;
+		&:hover {
+			background: $darkBlue !important;
+		}
+	}
+}
+
+.reply {
+	margin-left: 50px;
+	padding-left: 20px;
+	border-left: 3px solid #dedbf1;
+}
+.mention {
+	font-weight: 700;
+	color: $darkBlue;
+}
+.local {
+	margin-right: 10px;
+	background: $darkBlue;
+	color: white !important;
+	padding: 4px 8px;
+	border-radius: 3px;
+}
