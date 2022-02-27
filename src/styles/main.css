@@ -238,3 +238,25 @@ body {
   padding: 4px 8px;
   border-radius: 3px;
 }
+
+@media only screen and (max-width: 600px) {
+  .App {
+    padding: 12px;
+  }
+  .comment {
+    margin: 10px 0;
+  }
+  .comment .likes {
+    margin-top: 60px;
+  }
+  .comment .main .header {
+    margin-left: -60px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .reply {
+    margin-left: 10px;
+    padding-left: 10px;
+  }
+}

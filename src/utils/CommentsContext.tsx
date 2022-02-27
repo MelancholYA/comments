@@ -2,7 +2,7 @@ import { createContext, FC, ReactChild, useState } from 'react';
 import data from './data';
 
 interface Icomment {
-	id: number;
+	id: string | number;
 	content: string;
 	createdAt: string;
 	score: number;
@@ -11,7 +11,7 @@ interface Icomment {
 	replies?: reply[];
 }
 interface reply {
-	id: number;
+	id: string | number;
 	content: string;
 	createdAt: string;
 	score: number;
@@ -39,7 +39,7 @@ interface Icontext {
 type Isetter = (
 	type: string,
 	value: Icomment,
-	to?: { name: string; id: number },
+	to?: { name: string; id: number | string },
 ) => void;
 
 export const CommentsContext = createContext<Icontext>({
@@ -64,38 +64,94 @@ const CommentsProvider: FC<{ children: ReactChild }> = ({ children }) => {
 
 					break;
 				case 'DELETE':
-					if (values.replyingTo) {
-						comments.map((comm) =>
-							comm.replies?.map((repl, i) =>
-								repl.user.username === values.user.username
-									? comm?.replies?.splice(i, 1)
-									: repl,
-							),
-						);
-
-						let leftComments = [...comments]
-							.filter((filter) => filter.user.username === values.user.username)
-							.map((item) =>
-								item.replies?.filter(
-									(reply) => reply.user.username !== values.user.username,
-								),
-							)[0];
-						let newState = comments.map((comment) =>
-							comment.user.username === values.replyingTo
-								? { ...comment, replies: leftComments }
-								: comment,
-						);
-						setComments(newState);
+					console.log({ values });
+					if (!values.replyingTo) {
+						setComments(comments.filter((comm) => comm.id !== values.id));
 					} else {
-						let filteredArr = [...comments].filter(
-							(comment) => comment.id !== values.id,
-						);
-						setComments(filteredArr);
+						let newArr = comments.map((comm, i) => {
+							comm.replies?.map((item, i) =>
+								item.id === values.id ? comm.replies?.splice(i, 1) : item,
+							);
+							return comm;
+						});
+						setComments(newArr);
 					}
 
 					break;
 				case 'REPLY':
+					let valuess = {
+						id: values.id,
+						content: values.content,
+						createdAt: values.createdAt,
+						score: values.score,
+						replyingTo: values.replyingTo ? values.replyingTo : '',
+						user: values.user,
+					};
+					let arr = comments.map((item) => {
+						if (item.id === to?.id) {
+							item.replies?.push(valuess);
+							return item;
+						} else {
+							item.replies?.map((repl) => {
+								if (repl.id === to?.id) {
+									item.replies?.push(valuess);
+									return repl;
+								} else {
+									return repl;
+								}
+							});
+							return item;
+						}
+					});
+					setComments(arr);
 					console.log({ values, to, comments });
+					break;
+
+				case 'PLUS':
+					let newArr = comments.map((item) => {
+						if (item.id === values.id) {
+							item.score += 1;
+							Object.freeze(item);
+							return item;
+						} else {
+							item.replies?.map((repl) => {
+								if (repl.id === values.id) {
+									repl.score += 1;
+									Object.freeze(repl);
+									return repl;
+								} else {
+									return repl;
+								}
+							});
+							return item;
+						}
+					});
+					setComments(newArr);
+
+					break;
+				case 'MINUS':
+					if (values.score > 0) {
+						let newArray = comments.map((item) => {
+							if (item.id === values.id) {
+								item.score -= 1;
+								Object.freeze(item);
+								return item;
+							} else {
+								item.replies?.map((repl) => {
+									if (repl.id === values.id) {
+										repl.score -= 1;
+										Object.freeze(repl);
+										return repl;
+									} else {
+										return repl;
+									}
+								});
+								return item;
+							}
+						});
+						setComments(newArray);
+					}
+
 					break;
 				default:
 					break;

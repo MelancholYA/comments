@@ -3,7 +3,7 @@ import NewComment from './NewComment';
 
 interface props {
 	data: {
-		id: number;
+		id: string | number;
 		content: string;
 		createdAt: string;
 		score: number;
@@ -20,7 +20,7 @@ interface props {
 	setter: (
 		type: string,
 		values: {
-			id: number;
+			id: string | number;
 			content: string;
 			createdAt: string;
 			score: number;
@@ -30,7 +30,7 @@ interface props {
 	) => void;
 }
 interface reply {
-	id: number;
+	id: string | number;
 	content: string;
 	createdAt: string;
 	score: number;
@@ -52,7 +52,7 @@ interface user {
 interface Ireply {
 	to?: {
 		name: string;
-		id: number;
+		id: string | number;
 	};
 	show: boolean;
 }
@@ -64,9 +64,9 @@ const Comment: FC<props> = ({ data, user, setter }) => {
 		<>
 			<div className='comment'>
 				<div className='likes'>
-					<button></button>
+					<button onClick={() => setter('PLUS', data)}></button>
 					<h2>{data.score}</h2>
-					<button></button>
+					<button onClick={() => setter('MINUS', data)}></button>
 				</div>
 				<div className='main'>
 					<div className='header'>
@@ -104,6 +104,11 @@ const Comment: FC<props> = ({ data, user, setter }) => {
 								) : (
 									<>
 										<button onClick={() => setShowReply({ show: false })}>
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												viewBox='0 0 512 512'>
+												<path d='M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-83.6 290.5c4.8 4.8 4.8 12.6 0 17.4l-40.5 40.5c-4.8 4.8-12.6 4.8-17.4 0L256 313.3l-66.5 67.1c-4.8 4.8-12.6 4.8-17.4 0l-40.5-40.5c-4.8-4.8-4.8-12.6 0-17.4l67.1-66.5-67.1-66.5c-4.8-4.8-4.8-12.6 0-17.4l40.5-40.5c4.8-4.8 12.6-4.8 17.4 0l66.5 67.1 66.5-67.1c4.8-4.8 12.6-4.8 17.4 0l40.5 40.5c4.8 4.8 4.8 12.6 0 17.4L313.3 256l67.1 66.5z' />
+											</svg>
 											<span>Dismiss</span>
 										</button>
 									</>
@@ -117,14 +122,6 @@ const Comment: FC<props> = ({ data, user, setter }) => {
 											<path d='M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z' />
 										</svg>
 										<span>Delete</span>
-									</button>
-									<button>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											viewBox='0 0 576 512'>
-											<path d='M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z' />
-										</svg>
-										<span>Edit</span>
 									</button>
 								</>
 							)}
